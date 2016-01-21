@@ -1,0 +1,33 @@
+﻿          <h2>Version 06.01.00 - April 21st, 2012</h2>
+		  <ul>
+			<li>Resolved issues installing to SQL Azure</li>
+			<li>Updated module to support proper installation if a failure occured during initial install</li>
+			<li>Resolved issue with import/export</li>
+		  </ul>
+		  <h2>Version 06.00.02 - October 22nd, 2012</h2>
+          <ul>
+            <li>Project moved to CodePlex and DNN Forge</li>
+            <li>Code-base cleaned and missing documentation added</li>
+            <li>Module updated to 5.x packaging standard and MSBuild for quick processing</li>
+          </ul>
+        
+          <h2>Version 06.00.01 - January 24th, 2012</h2>
+          <ul>
+            <li>Modifications to resolve display issue on "settings" page for certain DNN 6.x users.</li>
+          </ul>
+          
+          <h2>Version 06.00.00 - November 25th, 2011</h2>
+          <ul>
+            <li>Modification of display elements to support the DNN 6.x design patterns</li>
+            <li>Performance cleanup after implementation of the ability to secure by role</li>
+          </ul>
+          
+          <h2>Version 05.02.00 - October 27th, 2011</h2>
+          <ul>
+            <li>CSS Layout fix for placement of Expand/Collapse Icons</li>
+            <li>General Code Cleanup and optimization</li>
+            <li>Addition of "Publish Date" option for ETH Items.</li>
+            <li>Addition of ability to restrict content by users in a specific role.</li>
+          </ul>
+          
+          <p>For prior release information please visit the <a href="http://www.iowacomputergurus.com/free-products/dotnetnuke-modules/dnn-expandable-text-html.aspx" target="_blank">Expandable Text/HTML Product Page</a></p>

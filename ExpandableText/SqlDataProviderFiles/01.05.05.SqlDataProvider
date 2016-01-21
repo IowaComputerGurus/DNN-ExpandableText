@@ -1,0 +1,99 @@
+﻿--Add the SortOrder column
+if NOT exists(select * from sys.columns 
+            where Name = N'SortOrder' and Object_ID = Object_ID(N'{databaseOwner}[{objectQualifier}ICG_ETH_ExpandableTextHtml]'))    
+begin
+    ALTER TABLE {databaseOwner}[{objectQualifier}ICG_ETH_ExpandableTextHtml]
+	ADD SortOrder INT NOT NULL DEFAULT 0
+end
+GO
+
+
+--Modify the needed procedures
+ALTER PROCEDURE {databaseOwner}{objectQualifier}ICG_ETH_GetExpandableTextHtml
+	@ModuleId int,
+    @ItemId int
+AS
+SELECT ModuleId,
+       ItemId,
+       title,
+       body,
+       lastUpdated,
+       IsExpanded,
+	   SortOrder
+FROM {objectQualifier}ICG_ETH_ExpandableTextHtml
+WHERE  ModuleId = @ModuleId
+	AND ItemId = @ItemId
+GO
+
+ALTER PROCEDURE {databaseOwner}{objectQualifier}ICG_ETH_AddExpandableTextHtml
+	@ModuleId       int,
+	@Title			VARCHAR(1000),
+	@Body			NTEXT,
+	@LastUpdated	DATETIME,
+	@IsExpanded		BIT,
+	@SortOrder		INT
+AS
+INSERT INTO {objectQualifier}ICG_ETH_ExpandableTextHtml (
+	ModuleId,
+	Title,
+	Body,
+	LastUpdated,
+	IsExpanded,
+	SortOrder
+) 
+VALUES (
+	@ModuleId,
+	@Title,
+	@Body,
+	@LastUpdated,
+	@IsExpanded,
+	@SortOrder
+)
+
+GO
+
+ALTER PROCEDURE {databaseOwner}{objectQualifier}ICG_ETH_UpdateExpandableTextHtml
+
+	@ModuleId       int,
+    @ItemId         int,
+	@Title			VARCHAR(1000),
+	@Body			NTEXT,
+	@LastUpdated	DATETIME,
+	@IsExpanded		BIT,
+	@SortOrder		INT
+
+AS
+
+UPDATE {objectQualifier}ICG_ETH_ExpandableTextHtml
+SET    Title       = @Title,
+       Body = @Body,
+       LastUpdated   = @LastUpdated,
+       IsExpanded = @IsExpanded,
+       SortOrder = @SortOrder
+WHERE  ModuleId = @ModuleId
+	AND    ItemId = @ItemId
+
+GO
+
+ALTER PROCEDURE {databaseOwner}[{objectQualifier}ICG_ETH_GetExpandableTextHtmls]
+	@ModuleId int,
+	@OrderBy VARCHAR(1000)
+AS
+DECLARE @SQL VARCHAR(5000)
+
+SET @SQL = '
+SELECT ModuleId,
+       ItemId,
+       title,
+       body,
+       lastUpdated,
+	   isExpanded,
+	   SortOrder
+FROM {objectQualifier}ICG_ETH_ExpandableTextHtml
+WHERE  ModuleId = ' + CAST(@ModuleId AS VARCHAR) + ' '
+
+SET @SQL = @SQL + @OrderBy
+EXEC(@SQL)
+GO
+
+

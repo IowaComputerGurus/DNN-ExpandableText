@@ -1,0 +1,143 @@
+﻿/************************************************************/
+/*****              SqlDataProvider                     *****/
+/*****                                                  *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+/** Create Table **/
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ICG_ETH_ExpandableTextHtml]') and OBJECTPROPERTY(id, N'IsTable') = 1)
+	BEGIN
+		CREATE TABLE {databaseOwner}[{objectQualifier}ICG_ETH_ExpandableTextHtml]
+		(
+			[ModuleID] [int] NOT NULL,
+			[ItemID] [int] NOT NULL IDENTITY(1, 1),
+			[Title] varchar(1000) NOT NULL,
+			[Body] [ntext] NOT NULL,
+			[LastUpdated] [datetime] NOT NULL
+		)
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ICG_ETH_ExpandableTextHtml] ADD CONSTRAINT [PK_{objectQualifier}ICG_ETH_ExpandableTextHtml] PRIMARY KEY CLUSTERED  ([ItemID])
+		CREATE NONCLUSTERED INDEX [IX_{objectQualifier}ICG_ETH_ExpandableTextHtml] ON {databaseOwner}[{objectQualifier}ICG_ETH_ExpandableTextHtml] ([ModuleID])
+
+	END
+GO
+
+
+/** Drop Existing Stored Procedures **/
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ICG_ETH_GetExpandableTextHtmls]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}[{objectQualifier}ICG_ETH_GetExpandableTextHtmls]
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ICG_ETH_GetExpandableTextHtml]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}[{objectQualifier}ICG_ETH_GetExpandableTextHtml]
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ICG_ETH_AddExpandableTextHtml]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}[{objectQualifier}ICG_ETH_AddExpandableTextHtml]
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ICG_ETH_UpdateExpandableTextHtml]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}[{objectQualifier}ICG_ETH_UpdateExpandableTextHtml]
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ICG_ETH_DeleteExpandableTextHtml]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}[{objectQualifier}ICG_ETH_DeleteExpandableTextHtml]
+GO
+
+/** Create Stored Procedures **/
+
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}ICG_ETH_GetExpandableTextHtmls]
+	@ModuleId int,
+	@OrderBy VARCHAR(1000)
+AS
+DECLARE @SQL VARCHAR(5000)
+
+SET @SQL = '
+SELECT ModuleId,
+       ItemId,
+       title,
+       body,
+       lastUpdated
+FROM {objectQualifier}ICG_ETH_ExpandableTextHtml
+WHERE  ModuleId = ' + CAST(@ModuleId AS VARCHAR) + ' '
+
+SET @SQL = @SQL + @OrderBy
+EXEC(@SQL)
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ICG_ETH_GetExpandableTextHtml
+	@ModuleId int,
+    @ItemId int
+AS
+SELECT ModuleId,
+       ItemId,
+       title,
+       body,
+       lastUpdated
+FROM {objectQualifier}ICG_ETH_ExpandableTextHtml
+WHERE  ModuleId = @ModuleId
+	AND ItemId = @ItemId
+GO
+
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ICG_ETH_AddExpandableTextHtml
+	@ModuleId       int,
+	@Title			VARCHAR(1000),
+	@Body			NTEXT,
+	@LastUpdated	DATETIME
+AS
+INSERT INTO {objectQualifier}ICG_ETH_ExpandableTextHtml (
+	ModuleId,
+	Title,
+	Body,
+	LastUpdated
+) 
+VALUES (
+	@ModuleId,
+	@Title,
+	@Body,
+	@LastUpdated
+)
+
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ICG_ETH_UpdateExpandableTextHtml
+
+	@ModuleId       int,
+    @ItemId         int,
+	@Title			VARCHAR(1000),
+	@Body			NTEXT,
+	@LastUpdated	DATETIME
+
+AS
+
+UPDATE {objectQualifier}ICG_ETH_ExpandableTextHtml
+SET    Title       = @Title,
+       Body = @Body,
+       LastUpdated   = @LastUpdated
+WHERE  ModuleId = @ModuleId
+	AND    ItemId = @ItemId
+
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ICG_ETH_DeleteExpandableTextHtml
+	@ModuleId       int,
+    @ItemId         int
+AS
+
+DELETE FROM {objectQualifier}ICG_ETH_ExpandableTextHtml
+WHERE  ModuleId = @ModuleId
+	AND    ItemId = @ItemId
+
+GO
+
+/************************************************************/
+/*****              SqlDataProvider                     *****/
+/************************************************************/

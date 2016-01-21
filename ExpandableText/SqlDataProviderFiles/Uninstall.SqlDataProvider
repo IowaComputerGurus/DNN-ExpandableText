@@ -1,0 +1,68 @@
+﻿/************************************************************/
+/*****              SqlDataProvider                     *****/
+/*****                                                  *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+--04.00.00 - Module Settings
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ICG_ETH_ModuleSettings]') and OBJECTPROPERTY(id, N'IsTable') = 1)
+	BEGIN
+		DROP TABLE {databaseOwner}[{objectQualifier}ICG_ETH_ModuleSettings]
+	END
+GO
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ICG_ETH_ModuleSettingsSelectOne]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}[{objectQualifier}ICG_ETH_ModuleSettingsSelectOne]
+GO
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ICG_ETH_ModuleSettingsSave]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}[{objectQualifier}ICG_ETH_ModuleSettingsSave]
+GO
+
+
+/** Drop FAQs Table **/
+ALTER TABLE {databaseOwner}[{objectQualifier}ICG_ETH_ExpandableTextHtml] DROP CONSTRAINT [FK_{objectQualifier}ICG_ETH_ExpandableTextHtml_{objectQualifier}Modules]
+
+ALTER TABLE {databaseOwner}[{objectQualifier}ICG_ETH_ExpandableTextHtml] DROP CONSTRAINT [PK_{objectQualifier}ICG_ETH_ExpandableTextHtml]
+GO
+
+DROP INDEX {databaseOwner}[{objectQualifier}ICG_ETH_ExpandableTextHtml].[IX_{objectQualifier}ICG_ETH_ExpandableTextHtml]
+GO
+
+DROP TABLE {databaseOwner}[{objectQualifier}ICG_ETH_ExpandableTextHtml]
+GO
+
+/** Drop Stored Procedures **/
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ICG_ETH_GetExpandableTextHtmls]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}[{objectQualifier}ICG_ETH_GetExpandableTextHtmls]
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ICG_ETH_GetExpandableTextHtml]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}[{objectQualifier}ICG_ETH_GetExpandableTextHtml]
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ICG_ETH_AddExpandableTextHtml]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}[{objectQualifier}ICG_ETH_AddExpandableTextHtml]
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ICG_ETH_UpdateExpandableTextHtml]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}[{objectQualifier}ICG_ETH_UpdateExpandableTextHtml]
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ICG_ETH_DeleteExpandableTextHtml]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}[{objectQualifier}ICG_ETH_DeleteExpandableTextHtml]
+GO
+
+
+/************************************************************/
+/*****              SqlDataProvider                     *****/
+/************************************************************/

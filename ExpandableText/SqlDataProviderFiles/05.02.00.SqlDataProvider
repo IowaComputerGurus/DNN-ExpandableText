@@ -1,0 +1,117 @@
+﻿if NOT exists(select * from sys.columns 
+            where Name = N'PublishDate' and Object_ID = Object_ID(N'{databaseOwner}[{objectQualifier}ICG_ETH_ExpandableTextHtml]'))    
+begin
+	ALTER TABLE {databaseOwner}[{objectQualifier}ICG_ETH_ExpandableTextHtml] 
+		ADD PublishDate DATETIME NOT NULL DEFAULT GETDATE()
+end
+GO
+
+if NOT exists(select * from sys.columns 
+            where Name = N'RequiredRole' and Object_ID = Object_ID(N'{databaseOwner}[{objectQualifier}ICG_ETH_ExpandableTextHtml]'))    
+begin
+	ALTER TABLE {databaseOwner}[{objectQualifier}ICG_ETH_ExpandableTextHtml]
+		ADD RequiredRole NVARCHAR(200) NOT NULL DEFAULT '-1'
+end
+GO
+
+
+ALTER PROCEDURE {databaseOwner}{objectQualifier}ICG_ETH_AddExpandableTextHtml
+	@ModuleId       int,
+	@Title			NVARCHAR(1000),
+	@Body			NTEXT,
+	@LastUpdated	DATETIME,
+	@IsExpanded		BIT,
+	@SortOrder		INT,
+	@PublishDate	DATETIME,
+	@RequiredRole	NVARCHAR(200)
+AS
+INSERT INTO {objectQualifier}ICG_ETH_ExpandableTextHtml (
+	ModuleId,
+	Title,
+	Body,
+	LastUpdated,
+	IsExpanded,
+	SortOrder,
+	PublishDate,
+	RequiredRole
+) 
+VALUES (
+	@ModuleId,
+	@Title,
+	@Body,
+	@LastUpdated,
+	@IsExpanded,
+	@SortOrder,
+	@PublishDate,
+	@RequiredRole
+)
+
+GO
+
+ALTER PROCEDURE {databaseOwner}{objectQualifier}ICG_ETH_UpdateExpandableTextHtml
+
+	@ModuleId       int,
+    @ItemId         int,
+	@Title			NVARCHAR(1000),
+	@Body			NTEXT,
+	@LastUpdated	DATETIME,
+	@IsExpanded		BIT,
+	@SortOrder		INT,
+	@PublishDate	DATETIME,
+	@RequiredRole	NVARCHAR(200)
+
+AS
+
+UPDATE {objectQualifier}ICG_ETH_ExpandableTextHtml
+SET    Title       = @Title,
+       Body = @Body,
+       LastUpdated   = @LastUpdated,
+       IsExpanded = @IsExpanded,
+       SortOrder = @SortOrder,
+	   PublishDate = @PublishDate,
+	   RequiredRole = @RequiredRole
+WHERE  ModuleId = @ModuleId
+	AND    ItemId = @ItemId
+
+GO
+
+ALTER PROCEDURE {databaseOwner}{objectQualifier}ICG_ETH_GetExpandableTextHtml
+	@ModuleId int,
+    @ItemId int
+AS
+SELECT ModuleId,
+       ItemId,
+       title,
+       body,
+       lastUpdated,
+       IsExpanded,
+	   SortOrder,
+	   PublishDate,
+	   RequiredRole
+FROM {objectQualifier}ICG_ETH_ExpandableTextHtml
+WHERE  ModuleId = @ModuleId
+	AND ItemId = @ItemId
+GO
+
+ALTER PROCEDURE {databaseOwner}[{objectQualifier}ICG_ETH_GetExpandableTextHtmls]
+	@ModuleId int,
+	@OrderBy VARCHAR(1000)
+AS
+DECLARE @SQL VARCHAR(5000)
+
+SET @SQL = '
+SELECT ModuleId,
+       ItemId,
+       title,
+       body,
+       lastUpdated,
+	   isExpanded,
+	   SortOrder,
+	   PublishDate,
+	   RequiredRole
+FROM {objectQualifier}ICG_ETH_ExpandableTextHtml
+WHERE  ModuleId = ' + CAST(@ModuleId AS VARCHAR) + ' '
+
+SET @SQL = @SQL + @OrderBy
+EXEC(@SQL)
+GO

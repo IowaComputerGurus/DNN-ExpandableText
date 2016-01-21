@@ -1,0 +1,6 @@
+--Modification to allow non-english characters in the title
+ALTER TABLE {databaseOwner}[{objectQualifier}ICG_ETH_ExpandableTextHtml]
+	ALTER COLUMN Title NVARCHAR(1000) NOT NULL
+
+GO
+

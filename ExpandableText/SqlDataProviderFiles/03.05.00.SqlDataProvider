@@ -1,0 +1,50 @@
+﻿ALTER PROCEDURE {databaseOwner}{objectQualifier}ICG_ETH_AddExpandableTextHtml
+	@ModuleId       int,
+	@Title			NVARCHAR(1000),
+	@Body			NTEXT,
+	@LastUpdated	DATETIME,
+	@IsExpanded		BIT,
+	@SortOrder		INT
+AS
+INSERT INTO {objectQualifier}ICG_ETH_ExpandableTextHtml (
+	ModuleId,
+	Title,
+	Body,
+	LastUpdated,
+	IsExpanded,
+	SortOrder
+) 
+VALUES (
+	@ModuleId,
+	@Title,
+	@Body,
+	@LastUpdated,
+	@IsExpanded,
+	@SortOrder
+)
+
+GO
+
+ALTER PROCEDURE {databaseOwner}{objectQualifier}ICG_ETH_UpdateExpandableTextHtml
+
+	@ModuleId       int,
+    @ItemId         int,
+	@Title			NVARCHAR(1000),
+	@Body			NTEXT,
+	@LastUpdated	DATETIME,
+	@IsExpanded		BIT,
+	@SortOrder		INT
+
+AS
+
+UPDATE {objectQualifier}ICG_ETH_ExpandableTextHtml
+SET    Title       = @Title,
+       Body = @Body,
+       LastUpdated   = @LastUpdated,
+       IsExpanded = @IsExpanded,
+       SortOrder = @SortOrder
+WHERE  ModuleId = @ModuleId
+	AND    ItemId = @ItemId
+
+GO
+

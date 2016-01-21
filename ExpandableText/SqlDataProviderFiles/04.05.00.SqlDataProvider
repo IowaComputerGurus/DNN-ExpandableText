@@ -1,0 +1,122 @@
+﻿if NOT exists(select * from sys.columns 
+            where Name = N'ShowExpandCollapseAll' and Object_ID = Object_ID(N'{databaseOwner}[{objectQualifier}ICG_ETH_ModuleSettings]'))    
+begin
+ALTER TABLE {databaseOwner}[{objectQualifier}ICG_ETH_ModuleSettings]
+	ADD ShowExpandCollapseAll BIT NOT NULL DEFAULT 1
+end
+GO
+
+
+
+/* =====================================================================================
+ *   TABLE: ModuleSettings
+ *   Generated With: Codesmith
+ *   Template: ICG DNN Stored Procedure Template 1.0.0
+ *   Generated On: 10/23/2009 6:24:26 PM
+ *  ===================================================================================== 
+ */
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ICG_ETH_ModuleSettingsSelectOne]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}[{objectQualifier}ICG_ETH_ModuleSettingsSelectOne]
+GO
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ICG_ETH_ModuleSettingsSave]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}[{objectQualifier}ICG_ETH_ModuleSettingsSave]
+GO
+
+/* -------------------------------------------------------------------------------------
+ *  ModuleSettingsSelectOne
+ * -------------------------------------------------------------------------------------
+ */
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}ICG_ETH_ModuleSettingsSelectOne]
+	@ModuleId int
+AS
+SELECT
+	[ModuleId],
+	[SortOrder],
+	[TitleCss],
+	[ContentCss],
+	[ExpandOnPrint],
+	[HeaderText],
+	[UseJquery],
+	[DisplayLimit],
+	[ShowAllText],
+	[ShowExpandCollapseAll]
+FROM {databaseOwner}[{objectQualifier}ICG_ETH_ModuleSettings]
+WHERE
+	[ModuleId] = @ModuleId
+GO
+
+
+/* -------------------------------------------------------------------------------------
+ *   ModuleSettingsSave
+ * ------------------------------------------------------------------------------------- 
+ */
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}ICG_ETH_ModuleSettingsSave]
+	@ModuleId int, 
+	@SortOrder nvarchar(100), 
+	@TitleCss nvarchar(100), 
+	@ContentCss nvarchar(100), 
+	@ExpandOnPrint bit, 
+	@HeaderText ntext, 
+	@UseJquery bit, 
+	@DisplayLimit int, 
+	@ShowAllText nvarchar(1000),
+	@ShowExpandCollapseAll BIT
+AS
+
+IF NOT EXISTS(SELECT * FROM {databaseOwner}[{objectQualifier}ICG_ETH_ModuleSettings] WHERE ModuleId = @ModuleId)
+BEGIN
+    --Do Insert
+
+INSERT INTO {databaseOwner}[{objectQualifier}ICG_ETH_ModuleSettings] (
+	[ModuleId],
+	[SortOrder],
+	[TitleCss],
+	[ContentCss],
+	[ExpandOnPrint],
+	[HeaderText],
+	[UseJquery],
+	[DisplayLimit],
+	[ShowAllText],
+	[ShowExpandCollapseAll]
+) VALUES (
+	@ModuleId,
+	@SortOrder,
+	@TitleCss,
+	@ContentCss,
+	@ExpandOnPrint,
+	@HeaderText,
+	@UseJquery,
+	@DisplayLimit,
+	@ShowAllText,
+	@ShowExpandCollapseAll
+)
+END
+ELSE
+BEGIN
+    --Do Update
+UPDATE {databaseOwner}[{objectQualifier}ICG_ETH_ModuleSettings] 
+SET
+	[SortOrder] = @SortOrder,
+	[TitleCss] = @TitleCss,
+	[ContentCss] = @ContentCss,
+	[ExpandOnPrint] = @ExpandOnPrint,
+	[HeaderText] = @HeaderText,
+	[UseJquery] = @UseJquery,
+	[DisplayLimit] = @DisplayLimit,
+	[ShowAllText] = @ShowAllText,
+	[ShowExpandCollapseAll] = @ShowExpandCollapseAll
+WHERE
+	[ModuleId] = @ModuleId
+END
+
+GO
+
+
+/*
+ * End of Generated SqlDataProvider
+ *
+ */
+

@@ -1,0 +1,65 @@
+
+
+ALTER PROCEDURE {databaseOwner}{objectQualifier}ICG_ETH_GetExpandableTextHtml
+	@ModuleId int,
+    @ItemId int
+AS
+SELECT ModuleId,
+       ItemId,
+       title,
+       body,
+       lastUpdated,
+       IsExpanded
+FROM {objectQualifier}ICG_ETH_ExpandableTextHtml
+WHERE  ModuleId = @ModuleId
+	AND ItemId = @ItemId
+GO
+
+
+ALTER PROCEDURE {databaseOwner}{objectQualifier}ICG_ETH_AddExpandableTextHtml
+	@ModuleId       int,
+	@Title			VARCHAR(1000),
+	@Body			NTEXT,
+	@LastUpdated	DATETIME,
+	@IsExpanded		BIT
+AS
+INSERT INTO {objectQualifier}ICG_ETH_ExpandableTextHtml (
+	ModuleId,
+	Title,
+	Body,
+	LastUpdated,
+	IsExpanded
+) 
+VALUES (
+	@ModuleId,
+	@Title,
+	@Body,
+	@LastUpdated,
+	@IsExpanded
+)
+
+GO
+
+ALTER PROCEDURE {databaseOwner}{objectQualifier}ICG_ETH_UpdateExpandableTextHtml
+
+	@ModuleId       int,
+    @ItemId         int,
+	@Title			VARCHAR(1000),
+	@Body			NTEXT,
+	@LastUpdated	DATETIME,
+	@IsExpanded		BIT
+
+AS
+
+UPDATE {objectQualifier}ICG_ETH_ExpandableTextHtml
+SET    Title       = @Title,
+       Body = @Body,
+       LastUpdated   = @LastUpdated,
+       IsExpanded = @IsExpanded
+WHERE  ModuleId = @ModuleId
+	AND    ItemId = @ItemId
+
+GO
+/************************************************************/
+/*****              SqlDataProvider                     *****/
+/************************************************************/

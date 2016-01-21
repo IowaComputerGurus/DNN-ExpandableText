@@ -1,0 +1,156 @@
+<dotnetnuke type="Package" version="5.0">
+  <packages>
+    <package name="ICG.Modules.ExpandableTextHtml" type="Module" version="06.01.00">
+      <friendlyName>Expandable Text/Html</friendlyName>
+      <description>A module for displaying multiple HTML pieces of content within collapasable sections.</description>
+      <owner>
+        <name>Mitchel Sellers</name>
+        <organization>IowaComputerGurus Inc.</organization>
+        <url>http://www.iowacomputergurus.com</url>
+        <email>webmaster@iowacomputergurus.com</email>
+      </owner>
+      <iconFile></iconFile>
+      <license src="ManifestAssets\License.txt" />
+      <releaseNotes src="ManifestAssets\ReleaseNotes.txt" />
+      <dependencies>
+        <dependency type="CoreVersion">06.00.00</dependency>
+      </dependencies>
+      <components>
+
+        <component type="ResourceFile">
+          <resourceFiles>
+            <basePath>DesktopModules/ExpandableTextHtml</basePath>
+            <resourceFile>
+              <name>Resources.zip</name>
+            </resourceFile>
+          </resourceFiles>
+        </component>
+        <component type="Script">
+          <scripts>
+            <basePath>DesktopModules\ExpandableTextHtml</basePath>
+            <script type="Install">
+              <path>SqlDataProviderFiles</path>
+              <name>01.00.00.SqlDataProvider</name>
+              <version>01.00.00</version>
+            </script>
+            <script type="Install">
+              <path>SqlDataProviderFiles</path>
+              <name>01.01.00.SqlDataProvider</name>
+              <version>01.01.00</version>
+            </script>
+            <script type="Install">
+              <path>SqlDataProviderFiles</path>
+              <name>01.01.05.SqlDataProvider</name>
+              <version>01.01.05</version>
+            </script>
+            <script type="Install">
+              <path>SqlDataProviderFiles</path>
+              <name>01.02.00.SqlDataProvider</name>
+              <version>01.02.00</version>
+            </script>
+            <script type="Install">
+              <path>SqlDataProviderFiles</path>
+              <name>01.04.00.SqlDataProvider</name>
+              <version>01.04.00</version>
+            </script>
+            <script type="Install">
+              <path>SqlDataProviderFiles</path>
+              <name>01.05.05.SqlDataProvider</name>
+              <version>01.05.05</version>
+            </script>
+            <script type="Install">
+              <path>SqlDataProviderFiles</path>
+              <name>02.01.00.SqlDataProvider</name>
+              <version>02.01.00</version>
+            </script>
+            <script type="Install">
+              <path>SqlDataProviderFiles</path>
+              <name>03.05.00.SqlDataProvider</name>
+              <version>03.05.00</version>
+            </script>
+            <script type="Install">
+              <path>SqlDataProviderFiles</path>
+              <name>04.00.00.SqlDataProvider</name>
+              <version>04.00.00</version>
+            </script>
+            <script type="Install">
+              <path>SqlDataProviderFiles</path>
+              <name>04.05.00.SqlDataProvider</name>
+              <version>04.05.00</version>
+            </script>
+            <script type="Install">
+              <path>SqlDataProviderFiles</path>
+              <name>05.02.00.SqlDataProvider</name>
+              <version>05.02.00</version>
+            </script>
+            <script type="UnInstall">
+              <path>SqlDataProviderFiles</path>
+              <name>Uninstall.SqlDataProvider</name>
+              <version>06.00.02</version>
+            </script>
+          </scripts>
+        </component>
+        <component type="Module">
+          <desktopModule>
+            <moduleName>ICG.Modules.ExpandableTextHtml</moduleName>
+            <foldername>ExpandableTextHtml</foldername>
+            <businessControllerClass>ICG.Modules.ExpandableTextHtml.Components.ExpandableTextHtmlController</businessControllerClass>
+            <supportedFeatures>
+              <supportedFeature type="Portable" />
+              <supportedFeature type="Searchable" />
+            </supportedFeatures>
+            <moduleDefinitions>
+              <moduleDefinition>
+                <friendlyName>ExpandableTextHtml</friendlyName>
+                <defaultCacheTime>0</defaultCacheTime>
+                <moduleControls>
+                  <moduleControl>
+                    <controlKey />
+                    <controlSrc>DesktopModules/ExpandableTextHtml/ViewExpandableTextHtml.ascx</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle />
+                    <controlType>View</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <supportsPopUps>False</supportsPopUps>
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>Edit</controlKey>
+                    <controlSrc>DesktopModules/ExpandableTextHtml/EditExpandableTextHtml.ascx</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>Edit Content</controlTitle>
+                    <controlType>Edit</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <supportsPopUps>False</supportsPopUps>
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>Settings</controlKey>
+                    <controlSrc>DesktopModules/ExpandableTextHtml/Settings.ascx</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>ExpandableTextHtml Settings</controlTitle>
+                    <controlType>Edit</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                </moduleControls>
+              </moduleDefinition>
+            </moduleDefinitions>
+          </desktopModule>
+        </component>
+        <component type="Assembly">
+          <assemblies>
+            <basePath>bin</basePath>
+            <assembly>
+              <path>bin</path>
+              <name>ICG.Modules.ExpandableTextHtml.dll</name>
+            </assembly>
+          </assemblies>
+        </component>
+      </components>
+    </package>
+  </packages>
+</dotnetnuke>

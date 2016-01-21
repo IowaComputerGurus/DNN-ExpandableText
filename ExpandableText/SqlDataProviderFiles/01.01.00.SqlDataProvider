@@ -1,0 +1,11 @@
+if NOT exists(select * from sys.columns 
+            where Name = N'IsExpanded' and Object_ID = Object_ID(N'{databaseOwner}[{objectQualifier}ICG_ETH_ExpandableTextHtml]'))    
+begin
+    ALTER TABLE {databaseOwner}[{objectQualifier}ICG_ETH_ExpandableTextHtml]
+	ADD IsExpanded BIT NOT NULL DEFAULT 0
+
+end
+GO
+
+
+

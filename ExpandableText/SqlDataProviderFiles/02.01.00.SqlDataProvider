@@ -1,0 +1,17 @@
+--First remove any entries that reference deleted modules
+DELETE FROM {databaseOwner}[{objectQualifier}ICG_ETH_ExpandableTextHtml]
+WHERE ModuleId NOT IN (SELECT DISTINCT(ModuleId)
+						FROM {databaseOwner}[{objectQualifier}Modules]
+						)
+GO
+
+--Alter table to add constraint to auto complete in future
+ALTER TABLE {databaseOwner}[{objectQualifier}ICG_ETH_ExpandableTextHtml] 
+	WITH NOCHECK ADD CONSTRAINT [FK_{objectQualifier}ICG_ETH_ExpandableTextHtml_{objectQualifier}Modules] 
+		FOREIGN KEY ([ModuleID]) 
+			REFERENCES {databaseOwner}[{objectQualifier}Modules] ([ModuleID]) ON DELETE CASCADE
+GO
+
+
+
+/*End SQL Data Provider*/
