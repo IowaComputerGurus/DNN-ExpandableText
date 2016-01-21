@@ -259,7 +259,7 @@ namespace ICG.Modules.ExpandableTextHtml
 
                 //Add support link, edit only, open to new window!
                 actions.Add(GetNextActionID(), GetLocalizeString("SupportLink"), ModuleActionType.OnlineHelp, "", "",
-                            "http://dnnexpandabletext.codeplex.com/",
+                            "https://github.com/IowaComputerGurus/DNN-ExpandableText/issues",
                             false, SecurityAccessLevel.Edit, true, true);
 
                 return actions;
