@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="ICG.Modules.ExpandableTextHtml" type="Module" version="06.01.00">
+    <package name="ICG.Modules.ExpandableTextHtml" type="Module" version="07.00.00">
       <friendlyName>Expandable Text/Html</friendlyName>
       <description>A module for displaying multiple HTML pieces of content within collapasable sections.</description>
       <owner>
@@ -9,11 +9,11 @@
         <url>http://www.iowacomputergurus.com</url>
         <email>webmaster@iowacomputergurus.com</email>
       </owner>
-      <iconFile></iconFile>
+      <iconFile/>
       <license src="ManifestAssets\License.txt" />
       <releaseNotes src="ManifestAssets\ReleaseNotes.txt" />
       <dependencies>
-        <dependency type="CoreVersion">06.00.00</dependency>
+        <dependency type="CoreVersion">07.00.00</dependency>
       </dependencies>
       <components>
 
