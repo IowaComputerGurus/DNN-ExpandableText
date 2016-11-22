@@ -1,6 +1,13 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpandableTextHtml", "ExpandableText/ExpandableTextHtml.csproj", "{6CAAB887-5C61-4717-A465-032787C1DBF3}"
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpandableTextHtml", "ExpandableText\ExpandableTextHtml.csproj", "{6CAAB887-5C61-4717-A465-032787C1DBF3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CI Support", "CI Support", "{635EACA8-AA1D-4D36-954A-A83019395D92}"
+	ProjectSection(SolutionItems) = preProject
+		appveyor.yml = appveyor.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

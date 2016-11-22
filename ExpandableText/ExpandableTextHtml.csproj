@@ -102,6 +102,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="BuildScripts\ModulePackage.targets" />
+    <Content Include="BuildScripts\MSBuild.Community.Tasks.dll" />
     <Content Include="BuildScripts\MSBuild.Community.Tasks.Targets" />
     <Content Include="packages.config" />
     <None Include="SqlDataProviderFiles\01.00.00.SqlDataProvider" />
@@ -148,9 +149,9 @@
   <PropertyGroup>
     <Extension>zip</Extension>
     <DNNFileName>ExpandableTextHtml</DNNFileName>
-    <PackageName>ICG.Modules.ExpandableTextHtml</PackageName>
-    <MSBuildCommunityTasksPath>$(MSBuildProjectDirectory)\BuildScripts</MSBuildCommunityTasksPath>
+    <MSBuildCommunityTasksPath>BuildScripts</MSBuildCommunityTasksPath>
   </PropertyGroup>
+  <Import Project="BuildScripts\MSBuild.Community.Tasks.Targets" />
   <Import Project="BuildScripts\ModulePackage.Targets" />
   <Target Name="AfterBuild" DependsOnTargets="PackageModule">
   </Target>
