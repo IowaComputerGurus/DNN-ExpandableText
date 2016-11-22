@@ -45,6 +45,7 @@
       <InstallInclude Include="**\*.js" />
       <InstallInclude Include="**\*.txt"  Exclude="**\obj\**;**\_ReSharper*\**;" />
       <InstallInclude Include="**\images\*.*" />
+      <InstallInclude Include="**\ManifestAssets\*.*" />
     </ItemGroup>
 
     <ItemGroup>

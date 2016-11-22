@@ -9,7 +9,7 @@
         <url>http://www.iowacomputergurus.com</url>
         <email>webmaster@iowacomputergurus.com</email>
       </owner>
-      <iconFile/>
+      <iconFile>DesktopModules/ExpandableTextHtml/ManifestAssets/ETHLogo.png</iconFile>
       <license src="ManifestAssets\License.txt" />
       <releaseNotes src="ManifestAssets\ReleaseNotes.txt" />
       <dependencies>
