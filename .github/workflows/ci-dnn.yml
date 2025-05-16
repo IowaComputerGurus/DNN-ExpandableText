@@ -25,18 +25,11 @@ jobs:
     - name: Build the solution
       run: msbuild './ExpandableTextHtml.sln' /p:Configuration=Release;
       
-    - name: Collect Installers
-      if: github.event_name != 'pull_request'
-      run: |
-        md installers
-        Get-ChildItem -Include *install.zip -Recurse | Copy-Item -Destination "installers\"
-      shell: powershell
-      working-directory: .\
   
     - name: Store Install Package
       if: github.event_name != 'pull_request'
       uses: actions/upload-artifact@v4
       with:
         name: installers
-        path: './installers/**_install.zip'
+        path: './**/**_install.zip'
         retention-days: 5 # only need long enough to test/validate 
