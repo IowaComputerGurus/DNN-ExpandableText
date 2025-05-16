@@ -21,6 +21,7 @@
 using System;
 using System.Web.UI.WebControls;
 using DotNetNuke.Entities.Modules;
+using DotNetNuke.Framework.JavaScriptLibraries;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.UI.UserControls;
 using ICG.Modules.ExpandableTextHtml.Components;
@@ -46,7 +47,7 @@ namespace ICG.Modules.ExpandableTextHtml
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         protected void Page_Load(object sender, EventArgs e)
         {
-            DotNetNuke.Framework.jQuery.RequestDnnPluginsRegistration();
+            JavaScript.RequestRegistration(CommonJs.DnnPlugins);
         }
 
         /// <summary>

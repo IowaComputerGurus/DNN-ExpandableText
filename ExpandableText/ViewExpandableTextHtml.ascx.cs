@@ -27,6 +27,7 @@ using DotNetNuke.Common;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Framework;
+using DotNetNuke.Framework.JavaScriptLibraries;
 using DotNetNuke.Security;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Localization;
@@ -61,7 +62,7 @@ namespace ICG.Modules.ExpandableTextHtml
             try
             {
                 //Trigger DNN to request jQuery registration
-                jQuery.RequestRegistration();
+                JavaScript.RequestRegistration(CommonJs.jQuery);
 
                 if (!IsPostBack)
                 {

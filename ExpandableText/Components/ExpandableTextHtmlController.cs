@@ -25,14 +25,13 @@ using System.Xml;
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Modules;
-using DotNetNuke.Services.Search;
 
 namespace ICG.Modules.ExpandableTextHtml.Components
 {
     /// <summary>
     /// This is the controller class providing functionality to the module
     /// </summary>
-    public class ExpandableTextHtmlController : IPortable, ISearchable
+    public class ExpandableTextHtmlController : IPortable
     {
         #region Public Methods
 
@@ -97,32 +96,32 @@ namespace ICG.Modules.ExpandableTextHtml.Components
 
         #endregion
 
-        #region ISearchable Members
+        //#region ISearchable Members
 
-        /// <summary>
-        /// Implements the search interface required to allow DNN to index/search the content of your
-        /// module
-        /// </summary>
-        /// <param name="modInfo"></param>
-        /// <returns></returns>
-        public SearchItemInfoCollection GetSearchItems(ModuleInfo modInfo)
-        {
-            var searchItems = new SearchItemInfoCollection();
+        ///// <summary>
+        ///// Implements the search interface required to allow DNN to index/search the content of your
+        ///// module
+        ///// </summary>
+        ///// <param name="modInfo"></param>
+        ///// <returns></returns>
+        //public SearchItemInfoCollection GetSearchItems(ModuleInfo modInfo)
+        //{
+        //    var searchItems = new SearchItemInfoCollection();
 
-            var infos = GetExpandableTextHtmls(modInfo.ModuleID, "ORDER BY LastUpdated");
+        //    var infos = GetExpandableTextHtmls(modInfo.ModuleID, "ORDER BY LastUpdated");
 
-            //Add each item from the contents into the search index
-            foreach (var info in infos)
-            {
-                var searchInfo = new SearchItemInfo(modInfo.ModuleTitle, info.Title, 2, info.LastUpdated,
-                                                    modInfo.ModuleID, info.ItemId.ToString(), info.Body);
-                searchItems.Add(searchInfo);
-            }
+        //    //Add each item from the contents into the search index
+        //    foreach (var info in infos)
+        //    {
+        //        var searchInfo = new SearchItemInfo(modInfo.ModuleTitle, info.Title, 2, info.LastUpdated,
+        //                                            modInfo.ModuleID, info.ItemId.ToString(), info.Body);
+        //        searchItems.Add(searchInfo);
+        //    }
 
-            return searchItems;
-        }
+        //    return searchItems;
+        //}
 
-        #endregion
+        //#endregion
 
         #region IPortable Members
 

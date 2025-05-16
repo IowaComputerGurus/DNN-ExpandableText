@@ -24,6 +24,7 @@ using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Framework;
+using DotNetNuke.Framework.JavaScriptLibraries;
 using DotNetNuke.Security.Roles;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Localization;
@@ -54,7 +55,7 @@ namespace ICG.Modules.ExpandableTextHtml
         {
             try
             {
-                jQuery.RequestDnnPluginsRegistration();
+                JavaScript.RequestRegistration(CommonJs.DnnPlugins);
 
                 //Store the item id on every load
                 if (Request.QueryString["EntryId"] != null)
@@ -66,7 +67,7 @@ namespace ICG.Modules.ExpandableTextHtml
                 {
                     //Load the list of roles
                     var roleController = new RoleController();
-                    ddlRequiredRole.DataSource = roleController.GetPortalRoles(PortalId);
+                    ddlRequiredRole.DataSource = roleController.GetRoles(this.PortalId);
                     ddlRequiredRole.DataTextField = "RoleName";
                     ddlRequiredRole.DataValueField = "RoleName";
                     ddlRequiredRole.DataBind();
