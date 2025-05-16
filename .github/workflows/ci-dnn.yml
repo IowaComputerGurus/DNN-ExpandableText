@@ -1,0 +1,15 @@
+name: CI/CD Build & Deploy
+
+on:
+  push:
+    branches: [ develop ]
+  pull_request:
+    branches: [ develop ]
+  workflow_dispatch:
+
+jobs:
+  build_dnn:
+    uses: IowaComputerGurus/shared-github-actions/.github/workflows/dnn-build.yml@develop
+    name: 'Build DNN'
+    with:
+      solution-path: './ExpandableTextHtml.sln'

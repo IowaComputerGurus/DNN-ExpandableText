@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="ICG.Modules.ExpandableTextHtml" type="Module" version="07.00.00">
+    <package name="ICG.Modules.ExpandableTextHtml" type="Module" version="10.00.00">
       <friendlyName>Expandable Text/Html</friendlyName>
       <description>A module for displaying multiple HTML pieces of content within collapasable sections.</description>
       <owner>
