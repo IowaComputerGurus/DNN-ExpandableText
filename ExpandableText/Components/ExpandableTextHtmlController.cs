@@ -158,7 +158,6 @@ namespace ICG.Modules.ExpandableTextHtml.Components
                         AuthorUserId = -1, // Default author as system since we don't track the author in this module
                         IsActive = true, // Assuming all items are active
                         CultureCode = moduleInfo.CultureCode,
-                        Keywords = string.Empty // No specific keywords for this module
                     };
                     
                     searchDocuments.Add(searchDoc);
