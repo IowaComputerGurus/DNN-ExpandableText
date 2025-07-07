@@ -13,7 +13,7 @@
       <license src="ManifestAssets\License.txt" />
       <releaseNotes src="ManifestAssets\ReleaseNotes.txt" />
       <dependencies>
-        <dependency type="CoreVersion">07.00.00</dependency>
+        <dependency type="CoreVersion">09.07.00</dependency>
       </dependencies>
       <components>
 

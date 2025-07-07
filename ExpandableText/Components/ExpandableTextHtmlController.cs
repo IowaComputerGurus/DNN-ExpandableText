@@ -25,13 +25,14 @@ using System.Xml;
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Modules;
+using DotNetNuke.Services.Search.Entities;
 
 namespace ICG.Modules.ExpandableTextHtml.Components
 {
     /// <summary>
     /// This is the controller class providing functionality to the module
     /// </summary>
-    public class ExpandableTextHtmlController : IPortable
+    public class ExpandableTextHtmlController : ModuleSearchBase, IPortable
     {
         #region Public Methods
 
@@ -122,6 +123,51 @@ namespace ICG.Modules.ExpandableTextHtml.Components
         //}
 
         //#endregion
+
+        #region ModuleSearchBase Members
+
+        /// <summary>
+        /// Gets the search documents for the module.
+        /// </summary>
+        /// <param name="moduleInfo">The module information.</param>
+        /// <param name="beginDateUtc">The begin date in UTC.</param>
+        /// <returns>A collection of search documents.</returns>
+        public override IList<SearchDocument> GetModifiedSearchDocuments(ModuleInfo moduleInfo, DateTime beginDateUtc)
+        {
+            var searchDocuments = new List<SearchDocument>();
+            
+            // Get all expandable text items for this module, ordered by last updated date
+            var items = GetExpandableTextHtmls(moduleInfo.ModuleID, "ORDER BY LastUpdated");
+            
+            foreach (var item in items)
+            {
+                // Only include items that have been updated since the begin date
+                if (item.LastUpdated.ToUniversalTime() >= beginDateUtc)
+                {
+                    var searchDoc = new SearchDocument
+                    {
+                        UniqueKey = $"ETH_{moduleInfo.ModuleID}_{item.ItemId}",
+                        PortalId = moduleInfo.PortalID,
+                        TabId = moduleInfo.TabID,
+                        ModuleId = moduleInfo.ModuleID,
+                        ModuleDefId = moduleInfo.ModuleDefID,
+                        Title = item.Title,
+                        Body = item.Body,
+                        Description = item.Title,
+                        ModifiedTimeUtc = item.LastUpdated.ToUniversalTime(),
+                        AuthorUserId = -1, // Default author as system since we don't track the author in this module
+                        IsActive = true, // Assuming all items are active
+                        CultureCode = moduleInfo.CultureCode,
+                    };
+                    
+                    searchDocuments.Add(searchDoc);
+                }
+            }
+            
+            return searchDocuments;
+        }
+
+        #endregion
 
         #region IPortable Members
 
